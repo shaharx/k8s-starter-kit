@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-deployment
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      component: server
+  template:
+    metadata:
+      labels:
+        component: server
+    spec:
+      containers:
+        - name: dummy-server
+          image: shaharl-k8s-docker-local.jfrog.io/dummy-server
+          ports:
+            - containerPort: 3000
