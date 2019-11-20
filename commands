@@ -1,8 +1,2 @@
 kubectl port-forward <pod-name> 3000:3000
-
-echo "# k8s-starter-kit" >> README.md
-git init
-git add .
-git commit -m "first commit"
-git remote add origin https://github.com/shaharx/k8s-starter-kit.git
-git push -u origin master
+kubectl patch svc dummy-service -p '{"spec":{"type":"LoadBalancer"}}'

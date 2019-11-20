@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: dummy-deployment
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       component: server
@@ -12,8 +12,16 @@ spec:
       labels:
         component: server
     spec:
+      volumes:
+        - name: dummy-server-storage
+          persistentVolumeClaim:
+            claimName: dummy-pvc
       containers:
         - name: dummy-server
           image: shaharl-k8s-docker-local.jfrog.io/dummy-server
           ports:
             - containerPort: 3000
+          volumeMounts:
+            - name: dummy-server-storage
+              mountPath: /app/data/
+              subPath: files
